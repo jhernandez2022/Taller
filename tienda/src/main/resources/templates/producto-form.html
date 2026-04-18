@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Producto Form</title>
+
+    <style>
+        body{
+            font-family:Arial;
+            background:#f5efe6;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+            margin:0;
+        }
+
+        .box{
+            background:#fffaf3;
+            padding:25px;
+            border-radius:10px;
+            width:400px;
+            border:1px solid #e6d3b3;
+            box-shadow:0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        h2{
+            text-align:center;
+        }
+
+        input, select{
+            width:100%;
+            padding:10px;
+            margin:8px 0;
+            border:1px solid #e6d3b3;
+            border-radius:6px;
+            outline:none;
+            box-sizing:border-box;
+            transition:0.2s;
+            background:#fffaf3;
+        }
+
+        input:focus, select:focus{
+            border-color:#c8a97e;
+            transform:scale(1.01);
+        }
+
+        button{
+            width:100%;
+            padding:10px;
+            background:#c8a97e;
+            color:white;
+            border:none;
+            border-radius:6px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        button:hover{
+            background:#b8966c;
+            transform:translateY(-2px);
+        }
+
+        button:active{
+            transform:scale(0.98);
+        }
+
+        a{
+            display:block;
+            text-align:center;
+            margin-top:10px;
+            color:#7a5c3e;
+            text-decoration:none;
+        }
+
+        a:hover{
+            text-decoration:underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h2 th:text="${producto.idProducto == null ? 'Nuevo Producto' : 'Editar Producto'}"></h2>
+
+    <form th:action="@{/api/producto/guardar}" th:object="${producto}" method="post">
+
+        <input type="hidden" th:field="*{idProducto}">
+
+        <input type="text" th:field="*{nombreProducto}" placeholder="Nombre" required>
+
+        <input type="number" step="0.01" th:field="*{precioProducto}" placeholder="Precio" required>
+
+        <input type="number" th:field="*{stockProducto}" placeholder="Stock" required>
+
+        <select th:field="*{categoria}" required>
+            <option value="">Seleccione categoría</option>
+
+            <option th:each="c : ${categorias}"
+                    th:value="${c.idCategoria}"
+                    th:text="${c.nombreCategoria}">
+            </option>
+        </select>
+
+        <button type="submit">Guardar</button>
+
+    </form>
+
+    <a th:href="@{/api/producto}">Volver</a>
+
+</div>
+
+</body>
+</html>

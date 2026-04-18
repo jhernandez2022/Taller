@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Usuario</title>
+
+    <style>
+        body{
+            font-family:Arial;
+            background:#f5efe6;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+            margin:0;
+        }
+
+        .box{
+            background:#fffaf3;
+            padding:25px;
+            border-radius:10px;
+            width:400px;
+            border:1px solid #e6d3b3;
+            box-shadow:0 8px 18px rgba(0,0,0,0.05);
+        }
+
+        input{
+            width:100%;
+            padding:10px;
+            margin:8px 0;
+            border:1px solid #e6d3b3;
+            border-radius:6px;
+            outline:none;
+            box-sizing:border-box;
+            transition:0.2s;
+        }
+
+        input:focus{
+            border-color:#c8a97e;
+            transform:scale(1.01);
+        }
+
+        button{
+            background:#c8a97e;
+            color:white;
+            border:none;
+            padding:10px;
+            width:100%;
+            border-radius:6px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        button:hover{
+            background:#b8966c;
+            transform:translateY(-2px);
+        }
+
+        button:active{
+            transform:scale(0.98);
+        }
+
+        a{
+            display:block;
+            margin-top:10px;
+            text-align:center;
+            color:#7a5c3e;
+            text-decoration:none;
+        }
+
+        a:hover{
+            text-decoration:underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h2 th:text="${modoEdicion} ? 'Editar Usuario' : 'Nuevo Usuario'"></h2>
+
+    <form th:action="${modoEdicion} ? @{'/api/usuarios/actualizar/' + ${usuario.idUsuario}} : @{/api/usuarios/guardar}"
+          th:object="${usuario}" method="post">
+
+        <input type="text" th:field="*{nombreUsuario}" placeholder="Nombre">
+        <input type="text" th:field="*{apellidoUsuario}" placeholder="Apellido">
+        <input type="number" th:field="*{edadUsuario}" placeholder="Edad">
+
+        <button>Guardar</button>
+
+    </form>
+
+    <a th:href="@{/api/usuarios}">Volver</a>
+
+</div>
+
+</body>
+</html>

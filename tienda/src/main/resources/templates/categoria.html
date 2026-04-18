@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Categorías</title>
+
+    <style>
+        body{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e1e2f, #2c2c54);
+            margin:0;
+            padding:40px;
+            color:#f1f1f1;
+        }
+
+        /* TITULO */
+        h1{
+            text-align:center;
+            margin-bottom:30px;
+            font-size:2.5em;
+            letter-spacing:1px;
+        }
+
+        /* BOTÓN PRINCIPAL (MEJOR AISLADO) */
+        .btn-principal{
+            display:inline-block;
+            margin-bottom:20px;
+            padding:12px 20px;
+            background:#6c5ce7;
+            color:white;
+            text-decoration:none;
+            border-radius:10px;
+            font-weight:bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn-principal:hover{
+            background:#a29bfe;
+            transform: scale(1.05);
+        }
+
+        /* TABLA */
+        table{
+            width:100%;
+            border-collapse:collapse;
+            background:#2f2f4f;
+            border-radius:12px;
+            overflow:hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        th{
+            background:#6c5ce7;
+            color:white;
+            padding:15px;
+            text-transform:uppercase;
+            font-size:0.9em;
+            letter-spacing:1px;
+        }
+
+        td{
+            padding:14px;
+            text-align:center;
+            border-bottom:1px solid rgba(255,255,255,0.1);
+        }
+
+        tr:hover{
+            background:#3c3c6c;
+            transition:0.2s;
+        }
+
+        /* BOTONES */
+        .btn{
+            display:inline-block;
+            padding:8px 12px;
+            border-radius:6px;
+            color:white;
+            font-size:0.9em;
+            text-decoration:none;
+            transition:0.2s;
+            margin:2px;
+        }
+
+        .btn-editar{
+            background:#00b894;
+        }
+
+        .btn-editar:hover{
+            background:#55efc4;
+        }
+
+        .btn-eliminar{
+            background:#d63031;
+        }
+
+        .btn-eliminar:hover{
+            background:#ff7675;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Listado de Categorías</h1>
+
+<a th:href="@{/api/categoria/nuevo}">Nueva Categoría</a>
+<a th:href="@{/home}">Volver</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="c : ${categorias}">
+        <td th:text="${c.idCategoria}"></td>
+        <td th:text="${c.nombreCategoria}"></td>
+        <td th:text="${c.descripcionCategoria}"></td>
+        <td>
+            <a class="btn-editar" th:href="@{'/api/categoria/editar/' + ${c.idCategoria}}">Editar</a>
+            <a class="btn-eliminar" th:href="@{'/api/categoria/eliminar/' + ${c.idCategoria}}">Eliminar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5e6d3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .contenedor {
+            width: 360px;
+        }
+
+        .tarjeta {
+            background-color: #fffaf3;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #e0c9a6;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            color: #5a3e2b;
+        }
+
+        p {
+            color: #7a5c3e;
+        }
+
+        .usuario {
+            font-weight: bold;
+            color: #a67c52;
+        }
+
+        /* BOTÓN BASE */
+        .btn {
+            display: block;
+            padding: 10px;
+            margin-top: 8px;
+            text-decoration: none;
+            border-radius: 5px;
+            color: white;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* BOTÓN ACCIÓN */
+        .btn-accion {
+            background-color: #d2b48c;
+        }
+
+        .btn-accion:hover {
+            background-color: #b8956f;
+        }
+
+        /* BOTÓN LOGOUT */
+        .logout-btn {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #a67c52;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: #8b6f4e;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+<div class="contenedor">
+    <div class="tarjeta">
+        <h1>Bienvenido</h1>
+        <p>Hola, <span class="usuario" th:text="${username}"></span></p>
+        <p>Sistema listo</p>
+
+        <div class="acciones">
+            <a class="boton" th:href="@{/api/usuarios}">Usuarios</a>
+            <a class="boton" th:href="@{/api/producto}">Productos</a>
+            <a class="boton" th:href="@{/api/pedido}">Pedidos</a>
+            <a class="boton" th:href="@{/api/categoria}">Categorias</a>
+            <a class="boton" th:href="@{/api/detallePedido}">Detalle Pedido</a>
+
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="logout-btn">Cerrar Sesion</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

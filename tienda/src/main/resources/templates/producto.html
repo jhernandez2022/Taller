@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Productos</title>
+
+    <style>
+        body{
+            font-family: Arial;
+            background:#f5efe6;
+            margin:0;
+            padding:30px;
+        }
+
+        h1{
+            text-align:center;
+        }
+
+        /* BOTÓN BASE (antes tenías a global sin control) */
+        .btn{
+            display:inline-block;
+            margin-bottom:10px;
+            padding:10px 15px;
+            background:#c8a97e;
+            color:white;
+            text-decoration:none;
+            border-radius:6px;
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            background:#b8966c;
+            transform:translateY(-2px);
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            background:#fffaf3;
+            border-radius:8px;
+            overflow:hidden;
+        }
+
+        th{
+            background:#c8a97e;
+            color:white;
+            padding:10px;
+        }
+
+        td{
+            text-align:center;
+            padding:10px;
+            border-bottom:1px solid #e6d3b3;
+        }
+
+        tr:hover{
+            background:#f1e4d1;
+        }
+
+        /* BOTONES ACCIÓN */
+        .btn-editar{
+            background:#d4b483;
+            padding:6px 10px;
+            border-radius:4px;
+            color:white;
+            text-decoration:none;
+            transition:0.3s;
+        }
+
+        .btn-editar:hover{
+            background:#caa06a;
+        }
+
+        .btn-eliminar{
+            background:#c45a5a;
+            padding:6px 10px;
+            border-radius:4px;
+            color:white;
+            text-decoration:none;
+            transition:0.3s;
+        }
+
+        .btn-eliminar:hover{
+            background:#e06b6b;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Lista de Productos</h1>
+
+<a th:href="@{/api/producto/nuevo}">Nuevo Producto</a>
+<a th:href="@{/home}">Volver</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Stock</th>
+        <th>Categoría</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="p : ${productos}">
+        <td th:text="${p.idProducto}"></td>
+        <td th:text="${p.nombreProducto}"></td>
+        <td th:text="${p.precioProducto}"></td>
+        <td th:text="${p.stockProducto}"></td>
+        <td th:text="${p.categoria.nombreCategoria}"></td>
+
+        <td>
+            <a class="btn-editar"
+               th:href="@{'/api/producto/editar/' + ${p.idProducto}}">
+                Editar
+            </a>
+
+            <a class="btn-eliminar"
+               th:href="@{'/api/producto/eliminar/' + ${p.idProducto}}">
+                Eliminar
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

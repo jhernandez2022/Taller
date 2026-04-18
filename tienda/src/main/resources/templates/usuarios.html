@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Usuarios</title>
+
+    <style>
+        body{
+            font-family:Arial;
+            background:#f5efe6;
+            margin:0;
+            padding:30px;
+            color:#3e3e3e;
+        }
+
+        h1{
+            text-align:center;
+            margin-bottom:20px;
+        }
+
+        /* BOTÓN BASE (evita repetir estilos en todos los <a>) */
+        .btn{
+            display:inline-block;
+            margin-bottom:10px;
+            padding:10px 15px;
+            background:#c8a97e;
+            color:white;
+            text-decoration:none;
+            border-radius:6px;
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            background:#b8966c;
+            transform:translateY(-2px);
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            background:#fffaf3;
+            border:1px solid #e6d3b3;
+            border-radius:8px;
+            overflow:hidden;
+        }
+
+        th{
+            background:#c8a97e;
+            color:white;
+            padding:12px;
+        }
+
+        td{
+            padding:10px;
+            text-align:center;
+            border-bottom:1px solid #e6d3b3;
+        }
+
+        tr:hover{
+            background:#f1e4d1;
+        }
+
+        /* BOTONES ACCIÓN */
+        .btn-editar{
+            background:#d4b483;
+            padding:6px 10px;
+            border-radius:4px;
+            color:white;
+            text-decoration:none;
+            transition:0.3s;
+        }
+
+        .btn-editar:hover{
+            background:#caa06a;
+        }
+
+        .btn-eliminar{
+            background:#c45a5a;
+            padding:6px 10px;
+            border-radius:4px;
+            color:white;
+            text-decoration:none;
+            transition:0.3s;
+        }
+
+        .btn-eliminar:hover{
+            background:#e06b6b;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Lista de Usuarios</h1>
+
+<a th:href="@{/api/usuarios/nuevo}">Nuevo Usuario</a>
+<a th:href="@{/home}">Volver</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Edad</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="u : ${usuarios}">
+        <td th:text="${u.idUsuario}"></td>
+        <td th:text="${u.nombreUsuario}"></td>
+        <td th:text="${u.apellidoUsuario}"></td>
+        <td th:text="${u.edadUsuario}"></td>
+        <td>
+            <a class="btn-editar" th:href="@{'/api/usuarios/editar/' + ${u.idUsuario}}">Editar</a>
+            <a class="btn-eliminar" th:href="@{'/api/usuarios/eliminar/' + ${u.idUsuario}}">Eliminar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
